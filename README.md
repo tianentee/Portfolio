@@ -1,1 +1,16 @@
 # Portfolio
+
+Projects that I had discovered so far! 
+
+Good day! 
+This portfolio showcases some of my projects using R, Python. 
+
+## Time Series Analysis 
+- Project Overview: Recommendation of an Investment of a Stock by Analyzing Historical Data
+- Programming language used: R (Rstudio)
+- [Quick Link](Time-Series-Analysis/README.md#time-series-analysis)  
+
+## Survival Data Analysis 
+- Project Overview: Exploration of Proportional Hazards Model 
+- Programming language used: R (Rstudio)
+- [Quick Link](Survival-Data-Analysis/README.md#survival-data-analysis)  
