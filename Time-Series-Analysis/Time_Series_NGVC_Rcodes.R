@@ -1,4 +1,5 @@
-# --------------- Time Series Project ---------------
+# --------------- Time Series Analysis ---------------
+# Recommendation of an Investment of a Stock by Analyzing Historical Data 
 # Load library  
 library(fpp3)
 
