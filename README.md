@@ -20,4 +20,3 @@ This portfolio showcases some of my projects using R, Python.
 - Tool used: Microsoft Excel
 - [Quick Link](Customer-Feedback-Dashboard/README.md#customer-feedback-dashboard)
 
-- 
