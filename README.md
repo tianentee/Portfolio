@@ -14,3 +14,10 @@ This portfolio showcases some of my projects using R, Python.
 - Project Overview: Exploration of Proportional Hazards Model 
 - Programming language used: R (Rstudio)
 - [Quick Link](Survival-Data-Analysis/README.md#survival-data-analysis)  
+
+## Customer Feedback Dashboard 
+- Project Overview: Development of an Interactive Excel Dashboard
+- Tool used: Microsoft Excel
+- [Quick Link](Customer-Feedback-Dashboard/README.md#customer-feedback-dashboard)
+
+- 
