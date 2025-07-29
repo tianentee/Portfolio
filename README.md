@@ -3,7 +3,7 @@
 Projects that I had discovered so far! 
 
 Good day! 
-This portfolio showcases some of my projects using R, Python. 
+This portfolio showcases some of my projects using R and other tools. 
 
 ## Time Series Analysis 
 - Project Overview: Recommendation of an Investment of a Stock by Analyzing Historical Data
