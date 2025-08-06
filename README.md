@@ -20,3 +20,7 @@ This portfolio showcases some of my projects using R and other tools.
 - Tool used: Microsoft Excel
 - [Quick Link](Customer-Feedback-Dashboard/README.md#customer-feedback-dashboard)
 
+## SQL Practice
+- Project Overview: Exploration of SQL using Simple Movies Dataset
+- Tool used: SQL (DB Fiddle, MySQL v5.7)
+- [Quick Link](SQL-Practice/README.md#sql-practice)
