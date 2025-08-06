@@ -1,0 +1,163 @@
+**Schema (MySQL v5.7)**
+
+    -- Schema SQL
+    -- Create table 
+    CREATE TABLE movie (
+      id INTEGER PRIMARY KEY, 
+      title TEXT, 
+      director TEXT, 
+      year INTEGER, 
+      length_minutes INTEGER
+    ); 
+    
+    CREATE TABLE boxoffice (
+      movie_id INTEGER, 
+      rating FLOAT, 
+      domestic_sales INTEGER,
+      international_sales INTEGER
+    );
+    
+    -- Insert data
+    INSERT INTO movie 
+    VALUES (1, "Toy Story", "John Lasseter", 1995, 81), 
+           (2, "A Bug''s Life", "John Lasseter", 1998, 95), 
+           (3, "Toy Story 2", "John Lasseter", 1999, 93), 
+           (4, "Monsters, Inc.", "Pete Docter", 2001, 92), 
+           (5, "Finding Nemo", "Andrew Stanton", 2003, 107), 
+           (6, "The Incredibles", "Brad Bird", 2004, 116);
+    
+    INSERT INTO boxoffice
+    VALUES (5, 8.2, 380843261, 555900000), 
+           (3, 7.9, 245852179, 239163000), 
+           (6, 8, 261441092, 370001000), 
+           (1, 8.3, 191796233, 170162503), 
+           (4, 8.1, 289916256, 272900000), 
+           (2, 7.2, 162798565, 200600000);
+    
+    
+    
+
+---
+
+**Query #1**
+
+    -- Query SQL
+    -- 1. Join two tables
+    SELECT *
+    FROM movie
+    JOIN boxoffice
+      ON movie.id = boxoffice.movie_id
+    ORDER BY id ASC;
+
+| id  | title           | director       | year | length_minutes | movie_id | rating | domestic_sales | international_sales |
+| --- | --------------- | -------------- | ---- | -------------- | -------- | ------ | -------------- | ------------------- |
+| 1   | Toy Story       | John Lasseter  | 1995 | 81             | 1        | 8.3    | 191796233      | 170162503           |
+| 2   | A Bug''s Life   | John Lasseter  | 1998 | 95             | 2        | 7.2    | 162798565      | 200600000           |
+| 3   | Toy Story 2     | John Lasseter  | 1999 | 93             | 3        | 7.9    | 245852179      | 239163000           |
+| 4   | Monsters, Inc.  | Pete Docter    | 2001 | 92             | 4        | 8.1    | 289916256      | 272900000           |
+| 5   | Finding Nemo    | Andrew Stanton | 2003 | 107            | 5        | 8.2    | 380843261      | 555900000           |
+| 6   | The Incredibles | Brad Bird      | 2004 | 116            | 6        | 8      | 261441092      | 370001000           |
+
+---
+**Query #2**
+
+    
+    
+    -- 2. List all directors (alphabetically), without duplicates
+    SELECT DISTINCT director
+    FROM movie
+    ORDER BY director ASC;
+
+| director       |
+| -------------- |
+| Andrew Stanton |
+| Brad Bird      |
+| John Lasseter  |
+| Pete Docter    |
+
+---
+**Query #3**
+
+    
+    
+    -- 3. List the third and fourth movies released (ordered from most recent to least)
+    SELECT title, year
+    FROM movie
+    ORDER BY year DESC
+    LIMIT 2
+    OFFSET 2;
+
+| title          | year |
+| -------------- | ---- |
+| Monsters, Inc. | 2001 |
+| Toy Story 2    | 1999 |
+
+---
+**Query #4**
+
+    
+    
+    -- 4. Show all movies and their total sales in millions that were released on even number year
+    SELECT
+      title,
+      year,
+      (domestic_sales + international_sales) / 1000000 AS gross_sales_millions
+    FROM movie
+    JOIN boxoffice
+      ON movie.id = boxoffice.movie_id
+    WHERE year % 2 = 0;
+
+| title           | year | gross_sales_millions |
+| --------------- | ---- | -------------------- |
+| The Incredibles | 2004 | 631.4421             |
+| A Bug''s Life   | 1998 | 363.3986             |
+
+---
+**Query #5**
+
+    
+    
+    -- 5. List the number of movies of each director after year 2000
+    SELECT
+      d.director,
+      COUNT(title) AS movie_after_2000
+    FROM
+      (SELECT DISTINCT director FROM movie) AS d
+    LEFT JOIN movie
+      ON
+        -- Ensure all director included in the list
+        d.director = movie.director
+        AND
+        movie.year > 2000
+    GROUP BY director;
+
+| director       | movie_after_2000 |
+| -------------- | ---------------- |
+| Andrew Stanton | 1                |
+| Brad Bird      | 1                |
+| John Lasseter  | 0                |
+| Pete Docter    | 1                |
+
+---
+**Query #6**
+
+    
+    
+    -- 6. List the number of movies of each director for all time and after year 2000
+    SELECT
+      director,
+      COUNT(*) AS total_movies,
+      COUNT(CASE WHEN year > 2000 THEN 1 END) AS movies_after_2000
+    FROM movie
+    GROUP BY director;
+
+| director       | total_movies | movies_after_2000 |
+| -------------- | ------------ | ----------------- |
+| Andrew Stanton | 1            | 1                 |
+| Brad Bird      | 1            | 1                 |
+| John Lasseter  | 3            | 0                 |
+| Pete Docter    | 1            | 1                 |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/)
